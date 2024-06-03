@@ -1,23 +1,24 @@
-from bs4 import BeautifulSoup
 import telebot
-import scraping
-import table
+import scraper
 import os
+from dotenv import load_dotenv
 
+load_dotenv()
 
-bot = telebot.TeleBot(TOKEN)
+bot = telebot.TeleBot(os.environ.get("TELEGRAM_TOKEN"))
 
 @bot.message_handler(commands=["start"])
 def start_command(m):   
-    scraping.start_scraping()
+    print("Sended")
+    prices = scraper.get_prices()
     bot.reply_to(m, f"""
         Bienvendido a Bolivares Bot
-        Dolar BCV: {scraping.precios["Dolar BCV"]}
-        Dolar Paralelo: {scraping.precios["Dolar Paralelo"]}
-        Dolar Binance: {scraping.precios["Dolar Binance"]}
-        Dolar Web:  {scraping.precios["Dolar Web"]}
-        Dolar Today: {scraping.precios["Dolar Today"]}
-        Dolar Paralelo VIP: {scraping.precios["Dolar Paralelo VIP"]}
+        Dolar BCV: {prices["Dolar BCV"]}
+        Dolar Paralelo: {prices["Dolar Paralelo"]}
+        Dolar Binance: {prices["Dolar Binance"]}
+        Dolar Web:  {prices["Dolar Web"]}
+        Dolar Today: {prices["Dolar Today"]}
+        Dolar Paralelo VIP: {prices["Dolar Paralelo VIP"]}
     """)
 
 @bot.message_handler(commands="info")
@@ -31,3 +32,4 @@ def bcv_command(m):
     bot.reply_to("SI")
 
 bot.polling(timeout=120)  # Aumenta el tiempo de espera a 60 segundos
+""
