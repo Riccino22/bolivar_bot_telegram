@@ -11,6 +11,7 @@ bot = telebot.TeleBot(os.environ.get("TELEGRAM_TOKEN"))
 def start_command(m):   
     print("Sended")
     prices = scraper.get_prices()
+    prices["Dolar BCV"]
     bot.reply_to(m, f"""
         Bienvendido a Bolivares Bot
         Dolar BCV: {prices["Dolar BCV"]}

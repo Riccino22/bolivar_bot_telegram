@@ -1,4 +1,4 @@
-venv
+bs_bot_venv/
 .env
 *.pyc
 __pycache__
