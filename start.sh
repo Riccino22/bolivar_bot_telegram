@@ -1,2 +1,2 @@
-docker run -d -p 4444:4444 selenium/standalone-chrome
+docker run -d -p 10000:10000 selenium/standalone-chrome
 streamlit run web.py

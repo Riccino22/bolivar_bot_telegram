@@ -11,7 +11,7 @@ options = Options()
 options.add_argument('--headless')
 options.add_argument('--no-sandbox')
 options.add_argument('--disable-dev-shm-usage')
-driver = webdriver.Remote("http://localhost:4444/wd/hub", DesiredCapabilities.CHROME)
+driver = webdriver.Remote("http://localhost:10000/wd/hub", DesiredCapabilities.CHROME)
 #driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
 
 def toNumber(tag):
