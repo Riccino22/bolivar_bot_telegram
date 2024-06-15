@@ -2,7 +2,7 @@ import telebot
 import scraper
 import os
 from dotenv import load_dotenv
-
+import data
 load_dotenv()
 
 bot = telebot.TeleBot(os.environ.get("TELEGRAM_TOKEN"))
@@ -12,6 +12,7 @@ def start_command(m):
     print("Sended")
     prices = scraper.get_prices()
     prices["Dolar BCV"]
+    data.update(prices)
     bot.reply_to(m, f"""
         Bienvendido a Bolivares Bot
         Dolar BCV: {prices["Dolar BCV"]}
@@ -24,9 +25,7 @@ def start_command(m):
 
 @bot.message_handler(commands="info")
 def info_command(m):
-    dt = table.data.drop(columns=['fecha'])
-    to_text = dt.to_string()
-    bot.reply_to(m, to_text)
+    bot.reply_to(m, data.info(m.text.replace("/info ", "")), parse_mode='Markdown')
 
 @bot.message_handler(commands=["bcv"])
 def bcv_command(m):

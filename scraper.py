@@ -6,6 +6,7 @@ from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 import time
+from datetime import datetime
 
 options = Options()
 options.add_argument('--headless')
@@ -28,7 +29,8 @@ def get_prices():
         "Dolar Binance": toNumber(parrafos[7]),
         "Dolar Web": toNumber(parrafos[9]),
         "Dolar Today": toNumber(parrafos[11]),
-        "Dolar Paralelo VIP": toNumber(parrafos[13])
+        "Dolar Paralelo VIP": toNumber(parrafos[13]),
+        "Datetime": datetime.now()
     }   
     if prices["Dolar Paralelo"] == "0.00":
         print("err")
