@@ -25,7 +25,17 @@ def start_command(m):
 
 @bot.message_handler(commands="info")
 def info_command(m):
-    bot.reply_to(m, data.info(m.text.replace("/info ", "")), parse_mode='Markdown')
+    try:    
+        bot.reply_to(m, data.info(m.text.replace("/info ", "")), parse_mode='Markdown')
+    except telebot.apihelper.ApiTelegramException:
+        bot.reply_to(m, "Para ver la informacion de una fecha especifica: /info AAAA-MM-DD")
+
+
+@bot.message_handler(commands="history")
+def history_command(m):
+    with open(data.graph(m.text.replace("/history ", "")), 'rb') as image:
+        bot.send_photo(m.chat.id, image)
+        
 
 @bot.message_handler(commands=["bcv"])
 def bcv_command(m):
